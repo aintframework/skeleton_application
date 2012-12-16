@@ -1,0 +1,54 @@
+<?
+require_once 'app/view/helpers.php';
+use app\view\helpers;
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?= helpers\head_title('Quick Start') ?>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+</head>
+<body class="preview" style="padding-top: 65px;">
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/">aint framework skeleton application</a>
+
+            <div class="nav-collapse" id="main-menu">
+                <ul class="nav" id="main-menu-left">
+                    <li><a href="<?= helpers\uri('index\index_action') ?>"><?= helpers\translate('Home') ?></a></li>
+                </ul>
+                <ul class="nav pull-right" id="main-menu-right">
+                    <li><a rel="tooltip" target="_blank" href="http://aint.lcf.name/"
+                           title="AINT PHP FRAMEWORK">AINT PHP FRAMEWORK</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <?= $content ?>
+    </div>
+    <footer class="footer">
+        <hr/>
+        <p class="pull-right"><?= helpers\translate('Powered by aint framework') ?></p>
+    </footer>
+</div>
+</body>
+</html>

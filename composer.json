@@ -1,0 +1,14 @@
+{
+    "name": "aintframework/skeleton_application",
+    "description": "skeleton application for aint framework",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "aint"
+    ],
+    "homepage": "http://aint.lcf.name",
+    "require": {
+        "php": ">=5.4.0",
+        "aintframework/aint_framework": "dev-master"
+    }
+}
