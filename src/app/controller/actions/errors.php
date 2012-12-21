@@ -8,8 +8,17 @@ use aint\mvc\dispatching;
 require_once 'aint/http.php';
 use aint\http;
 require_once 'aint/common.php';
-use aint\common; // todo: consider aint\error namespace for common error
+use aint\common;
 
+/**
+ * Error handler, this function is called if something happens
+ * during the dispatch process
+ *
+ * @param $request
+ * @param $params
+ * @param \exception $error
+ * @return array
+ */
 function error_action($request, $params, \exception $error) {
     if ($error instanceof dispatching\not_found_error) {
         $status = 404;
@@ -20,6 +29,6 @@ function error_action($request, $params, \exception $error) {
         error_log(get_class($error) . ' ' . $error->getMessage());
     }
     $response = view\render('errors/error', ['message' => $message]);
-    $response[http\response_status] = $status; // todo: add a function
+    $response[http\response_status] = $status;
     return $response;
 }

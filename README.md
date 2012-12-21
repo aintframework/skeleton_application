@@ -1,9 +1,4 @@
-aint framework skeleton_application
-===================================
-
-Introduction
-------------
-This is a simple, skeleton application using the aint framework.
+Official documentation is available at https://aint-framework.readthedocs.org/en/latest/quickstart/skeleton.html
 
 Installation Using Git & Composer
 ---------------------------------
