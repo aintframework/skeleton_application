@@ -28,7 +28,10 @@ function error_action($request, $params, \exception $error) {
         $message = 'System error';
         error_log(get_class($error) . ' ' . $error->getMessage());
     }
-    $response = view\render('errors/error', ['message' => $message]);
-    $response[http\response_status] = $status;
+    $response = http\response_status(
+        view\render('errors/error', ['message' => $message]),
+        $status
+    );
+
     return $response;
 }

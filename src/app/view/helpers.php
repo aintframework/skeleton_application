@@ -9,7 +9,7 @@ require_once 'app/model.php';
 use app\model;
 
 /**
- * Separator for the <title></title> tag content parts
+ * Separator for the <title/> tag content parts
  */
 const head_title_separator = ' >> ';
 
