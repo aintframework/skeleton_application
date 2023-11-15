@@ -23,5 +23,5 @@ const error_handler = 'app\controller\actions\errors\error_action';
  * by aint framework.
  */
 function run() {
-    dispatching\run_default(actions_namespace, error_handler);
+    dispatching\dispatch_http_default_router(actions_namespace, error_handler);
 }
