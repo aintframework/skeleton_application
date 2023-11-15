@@ -9,6 +9,6 @@
     "homepage": "http://aint.lcf.name",
     "require": {
         "php": ">=5.4.0",
-        "aintframework/aint_framework": "dev-master"
+        "aintframework/aint_framework": "^1.0"
     }
 }
