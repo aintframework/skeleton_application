@@ -35,12 +35,8 @@ const function_postfix = '_action';
  *    with ['id' => '1', 'a' => 'test'] as parameters
  * Routes
  *    /albums is routed to albums\index_action with no parameters
- *
- *
- * @param $request
- * @return array|null
  */
-function route_segment($request) {
+function route_segment(array $request): array {
     if (!($path = $request[http\request_path]))
         return [route_action => default_namespace
                                 . '\\' . default_function
@@ -65,12 +61,8 @@ function route_segment($request) {
 /**
  * Assembles albums\edit_action, ['id' => 123] to
  * /albums/edit/id/123
- *
- * @param $route_action
- * @param array $route_params
- * @return string
  */
-function assemble_segment($route_action, $route_params = []) {
+function assemble_segment(string $route_action, array $route_params = []): string {
     $params_uncombined = [];
     foreach ($route_params as $key => $value) {
         $params_uncombined[] = $key;

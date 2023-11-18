@@ -9,25 +9,16 @@ namespace aint\common;
  * returns its value if yes, and if not - returns $default
  *
  * No notice or warning is ever triggered
- *
- * @param $data
- * @param $name
- * @param null $default
- * @return null
  */
-function get_param($data, $name, $default = null) {
+function get_param(array $data, int|string $name, mixed $default = null): mixed {
     return array_key_exists($name, $data)
         ? $data[$name] : $default;
 }
 
 /**
  * Merges two arrays recursively
- *
- * @param array $config1
- * @param array $config2
- * @return array
  */
-function merge_recursive(array $config1, array $config2) {
+function merge_recursive(array $config1, array $config2): array {
     foreach ($config2 as $key => $value)
         if (array_key_exists($key, $config1))
             if (is_int($key))

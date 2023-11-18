@@ -21,12 +21,8 @@ class bad_columns_error extends \exception{};
 
 /**
  * Prepares WHERE part of SQL query
- *
- * @param $platform_namespace
- * @param array $where
- * @return string
  */
-function prepare_where($platform_namespace, array $where) {
+function prepare_where(string $platform_namespace, array $where): string {
     $quote_identifier = $platform_namespace . '\quote_identifier';
     $quote_value = $platform_namespace . '\quote_value';
     $sql = [];
@@ -40,13 +36,9 @@ function prepare_where($platform_namespace, array $where) {
 /**
  * Prepares SELECT part of sql query
  *
- * @param $platform_namespace
- * @param $columns
- * @param $table
- * @return string
  * @throws bad_columns_error
  */
-function prepare_select($platform_namespace, $columns, $table) {
+function prepare_select(string $platform_namespace, array $columns, string $table): string {
     $quote_identifier = $platform_namespace . '\quote_identifier';
     if (is_array($columns))
         $columns = implode(',', array_map($quote_identifier, $columns));
@@ -57,25 +49,16 @@ function prepare_select($platform_namespace, $columns, $table) {
 
 /**
  * Prepares DELETE part of sql query
- *
- * @param $platform_namespace
- * @param $table
- * @return string
  */
-function prepare_delete($platform_namespace, $table) {
+function prepare_delete(string $platform_namespace, string $table): string {
     $quote_identifier = $platform_namespace . '\quote_identifier';
     return sprintf(delete_specification, $quote_identifier($table));
 }
 
 /**
  * Prepares INSERT part of SQL query
- *
- * @param $platform_namespace
- * @param $table
- * @param $data
- * @return string
  */
-function prepare_insert($platform_namespace, $table, $data) {
+function prepare_insert(string $platform_namespace, string $table, array $data): string {
     $quote_identifier = $platform_namespace . '\quote_identifier';
     $quote_value = $platform_namespace . '\quote_value';
     $keys = implode(',',
@@ -87,13 +70,8 @@ function prepare_insert($platform_namespace, $table, $data) {
 
 /**
  * Prepares UPDATE part of SQL query
- *
- * @param $platform_namespace
- * @param $table
- * @param $data
- * @return string
  */
-function prepare_update($platform_namespace, $table, $data) {
+function prepare_update(string $platform_namespace, string $table, array $data): string {
     $quote_identifier = $platform_namespace . '\quote_identifier';
     $quote_value = $platform_namespace . '\quote_value';
     $set = [];

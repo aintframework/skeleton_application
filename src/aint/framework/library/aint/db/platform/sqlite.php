@@ -6,21 +6,15 @@ namespace aint\db\platform\sqlite;
 
 /**
  * Quotes an identifier such as a column name
- *
- * @param $identifier
- * @return string
  */
-function quote_identifier($identifier) {
+function quote_identifier(string $identifier): string {
     return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
 }
 
 /**
  * Quotes a value such as a column value
- *
- * @param $value
- * @return string
  */
-function quote_value($value){
+function quote_value(string $value): string {
     $value = str_replace('\'', '\\' . '\'', $value);
     if (is_array($value))
         $value = implode('\', \'', $value);

@@ -31,10 +31,8 @@ const request_method_post = 'POST',
 
 /**
  * Retrieves data about the current HTTP request using PHP's global arrays
- *
- * @return array
  */
-function build_request_from_globals() {
+function build_request_from_globals(): array {
     $path = $_SERVER['REQUEST_URI'];
     if (($separator_position = strpos($path, '?')) !== false)
         $path = substr($path, 0, $separator_position);
@@ -50,53 +48,36 @@ function build_request_from_globals() {
 
 /**
  * Whether the request is a POST
- *
- * @param $request
- * @return bool
  */
-function is_post($request) {
+function is_post(array $request): bool {
     return $request[request_method] === request_method_post;
 }
 
 /**
  * Whether the request is a GET
- *
- * @param $request
- * @return bool
  */
-function is_get($request) {
+function is_get(array $request): bool {
     return $request[request_method] === request_method_get;
 }
 
 /**
  * Whether the request is a DELETE
- *
- * @param $request
- * @return bool
  */
-function is_delete($request) {
+function is_delete(array $request): bool {
     return $request[request_method] === request_method_delete;
 }
 
 /**
  * Whether the request is a PUT
- *
- * @param $request
- * @return bool
  */
-function is_put($request) {
+function is_put(array $request): bool {
     return $request[request_method] === request_method_put;
 }
 
 /**
  * Prepares data for HTTP response based on the parameters passed
- *
- * @param string $body
- * @param int $code
- * @param array $headers
- * @return array
  */
-function build_response($body = '', $code = 200, $headers = []) {
+function build_response(string $body = '', int $code = 200, array $headers = []): array {
     return [
         response_body => $body,
         response_status => $code,
@@ -106,22 +87,15 @@ function build_response($body = '', $code = 200, $headers = []) {
 
 /**
  * Prepares default response data and sets it to be redirected to location specified
- *
- * @param $location
- * @return mixed
  */
-function build_redirect($location) {
+function build_redirect(string $location): array {
     return redirect(build_response(), $location);
 }
 
 /**
  * Sets the response data passed to be redirected to location specified
- *
- * @param $response
- * @param $location
- * @return array
  */
-function redirect($response, $location) {
+function redirect(array $response, string $location): array {
     array_push($response[response_headers], 'Location: ' . $location);
     $response[response_status] = 302;
     return $response;
@@ -129,21 +103,9 @@ function redirect($response, $location) {
 
 /**
  * Adds cookie header to the response array passed
- *
- * @param array $response
- * @param string $name Cookie name
- * @param string $value Value
- * @param integer $expires Timestamp
- * @param string $path
- * @param string $domain
- * @param boolean $secure
- * @param boolean $http_only
- * @param null $max_age
- * @param null $version
- * @return array
  */
-function add_cookie_header(array $response, $name = null, $value = null, $expires = null, $path = null, $domain = null,
-                           $secure = false, $http_only = false, $max_age = null, $version = null) {
+function add_cookie_header(array $response, ?string $name = null, ?string $value = null, ?int $expires = null, ?string $path = null, ?string $domain = null,
+                           bool $secure = false, bool $http_only = false, ?string $max_age = null, ?string $version = null) {
     if (strpos($value, '"')!==false)
         $value = '"' . urlencode(str_replace('"', '', $value)) . '"';
     else
@@ -171,12 +133,8 @@ function add_cookie_header(array $response, $name = null, $value = null, $expire
 
 /**
  * Returns value of a cookie by name
- *
- * @param $request
- * @param $name
- * @return mixed|null
  */
-function get_cookie_value($request, $name) {
+function get_cookie_value(array $request, string $name): mixed {
     if (isset($request[request_headers]['Cookie'])) {
         $key_value_pairs = preg_split('#;\s*#', $request[request_headers]['Cookie']);
         foreach ($key_value_pairs as $key_value) {
@@ -190,10 +148,8 @@ function get_cookie_value($request, $name) {
 
 /**
  * Outputs response data
- *
- * @param $response
  */
-function send_response($response) {
+function send_response(array $response): void {
     header('HTTP/1.1 ' . $response[response_status]);
     array_walk($response[response_headers], 'header');
     echo $response[response_body];
@@ -201,12 +157,8 @@ function send_response($response) {
 
 /**
  * Changes HTTP status in response data
- *
- * @param $response
- * @param $status
- * @return array
  */
-function response_status($response, $status) {
+function response_status(array $response, int $status): array {
     $response[response_status] = $status;
     return $response;
 }
@@ -215,10 +167,8 @@ function response_status($response, $status) {
  * Extracts http headers from current context
  *
  * Uses getallheaders function if available
- *
- * @return array
  */
-function get_headers_from_globals() {
+function get_headers_from_globals(): array {
     if (function_exists('getallheaders'))
         return getallheaders();
     else {

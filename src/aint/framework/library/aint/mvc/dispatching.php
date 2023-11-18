@@ -71,7 +71,7 @@ function dispatch_request($request, $routers, $actions_namespace, callable $erro
  * @param array $response_callbacks
  */
 function dispatch_http($routers, $actions_namespace, callable $error_handler,
-                       $request_callbacks = [], $route_callbacks = [], $response_callbacks = []) {
+                       $request_callbacks = [], $route_callbacks = [], $response_callbacks = []): void {
     $request = http\build_request_from_globals();
     $response = dispatch_request($request, $routers, $actions_namespace, $error_handler,
                                  $request_callbacks, $route_callbacks, $response_callbacks);
@@ -84,7 +84,7 @@ function dispatch_http($routers, $actions_namespace, callable $error_handler,
  * @param string $actions_namespace E.g. app\controller\actions
  * @param callable $error_handler
  */
-function dispatch_http_default_router($actions_namespace, callable $error_handler) {
+function dispatch_http_default_router(string $actions_namespace, callable $error_handler): void {
     dispatch_http(['\aint\mvc\routing\route_segment'],
         $actions_namespace,
         $error_handler);

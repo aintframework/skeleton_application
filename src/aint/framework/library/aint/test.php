@@ -5,7 +5,7 @@
 namespace aint\test;
 
 // todo: test, rewrite, use regex, optimize, add recursive require_mock
-function require_mock($filename, $replacements) {
+function require_mock(string $filename, array|callable $replacements): void {
     $file = stream_resolve_include_path($filename);
     $code = substr(file_get_contents($file), 5);
     if (is_callable($replacements))
