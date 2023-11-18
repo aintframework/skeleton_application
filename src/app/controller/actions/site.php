@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controller\actions\index;
+namespace app\controller\actions\site;
 
 use app\view;
 
@@ -9,5 +9,5 @@ use app\view;
  */
 function index_action(): array
 {
-    return view\render('index/index');
+    return view\render('site/index');
 }

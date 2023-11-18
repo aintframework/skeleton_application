@@ -1,25 +1,18 @@
 <?php
+
 namespace app\controller\actions\errors;
 
-require_once 'app/view.php';
-use app\view; 
-require_once 'aint/mvc/dispatching.php';
+use app\view;
 use aint\mvc\dispatching;
-require_once 'aint/http.php';
 use aint\http;
-require_once 'aint/common.php';
-use aint\common;
+use exception;
 
 /**
  * Error handler, this function is called if something happens
  * during the dispatch process
- *
- * @param $request
- * @param $params
- * @param \exception $error
- * @return array
  */
-function error_action($request, $params, \exception $error) {
+function error_action(array $request, array $params, exception $error): array
+{
     if ($error instanceof dispatching\not_found_error) {
         $status = 404;
         $message = 'Page ' . $request[http\request_path] . ' is not found';

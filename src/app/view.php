@@ -1,9 +1,8 @@
 <?php
+
 namespace app\view;
 
-require_once 'aint/templating.php';
-use aint\templating; 
-require_once 'aint/http.php';
+use aint\templating;
 use aint\http;
 
 /**
@@ -28,14 +27,11 @@ const layout_content_var = 'content';
  * Rendering for controller actions
  * 2-step strategy
  * returns http response data
- *
- * @param $template
- * @param array $vars
- * @return array
  */
-function render($template, $vars = []) {
+function render(string $template, array $vars = []): array
+{
     return http\build_response(
-        render_template(layout_template,[
+        render_template(layout_template, [
             layout_content_var => render_template($template, $vars)
         ])
     );
@@ -43,12 +39,11 @@ function render($template, $vars = []) {
 
 /**
  * Renders one template from `templates` directory
- *
- * @param $template
- * @param array $vars
- * @return string
  */
-function render_template($template, $vars = []) {
+function render_template(string $template, array $vars = []): string
+{
     return templating\render_template(
-        templates_path . $template . template_ext, $vars);
+        templates_path . $template . template_ext,
+        $vars
+    );
 }

@@ -1,7 +1,7 @@
 <?php
+
 namespace app\model;
 
-require_once 'aint/common.php';
 use aint\common;
 
 /**
@@ -20,10 +20,9 @@ const default_locale = 'en_US',
 /**
  * Returns main application configuration
  * (merged with app.local.ini if one exists)
- *
- * @return array
  */
-function get_app_config() {
+function get_app_config(): array
+{
     static $config;
     if ($config === null) {
         $app_dir = dirname(__FILE__);
@@ -37,15 +36,11 @@ function get_app_config() {
 /**
  * Translates a string using a language file for the locale specified
  * returns the string itself if no translation is found
- *
- * @param $text
- * @param string $locale
- * @return string
  */
-function translate($text, $locale = default_locale) {
+function translate(string $text, string $locale = default_locale): string
+{
     static $languages = [];
     if (!isset($languages[$locale]))
         $languages[$locale] = require languages_path . $locale . locale_file_ext;
-
-    return common\get_param($languages[$locale], $text, $text);
+    return (string)common\get_param($languages[$locale], $text, $text);
 }

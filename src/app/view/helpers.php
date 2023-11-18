@@ -1,11 +1,7 @@
 <?php
 namespace app\view\helpers;
 
-require_once 'app/view.php';
-use app\view;
-require_once 'aint/mvc/routing.php';
 use aint\mvc\routing;
-require_once 'app/model.php';
 use app\model;
 
 /**
@@ -18,11 +14,8 @@ const head_title_separator = ' >> ';
  * using head_title_separator as delimiter.
  *
  * Returns html tag prepared <title>...</title>
- *
- * @param string|null $text
- * @return string
  */
-function head_title($text = null) {
+function head_title(?string $text = null): string {
     static $title = '';
     if ($text !== null)
         if ($title === '')
@@ -34,21 +27,14 @@ function head_title($text = null) {
 
 /**
  * Converts action function name and the parameters list back to URI
- *
- * @param $route_action
- * @param array $route_params
- * @return string
  */
-function uri($route_action, $route_params = []) {
+function uri(string $route_action, array $route_params = []): string {
     return routing\assemble_segment($route_action, $route_params);
 }
 
 /**
  * Translates given piece of text, using model's translator
- *
- * @param $text
- * @return string
  */
-function translate($text) {
+function translate(string $text): string {
     return model\translate($text);
 }
